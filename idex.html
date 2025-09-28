@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chupi Salong</title>
+  <style>
+    body { font-family: Arial, sans-serif; background:#fffafc; margin:0; padding:0; color:#333; }
+    header { background:linear-gradient(135deg,#ff4a7c,#8e2de2); color:white; text-align:center; padding:40px 20px; }
+    header h1 { margin:0; font-size:2.5em; }
+    nav { background:white; padding:15px; text-align:center; box-shadow:0 2px 5px rgba(0,0,0,0.1); }
+    nav a { margin:0 15px; font-weight:bold; color:#8e2de2; text-decoration:none; }
+    section { max-width:700px; margin:auto; padding:40px 20px; }
+    h2 { text-align:center; color:#8e2de2; margin-bottom:30px; }
+
+    form { background:#fff0f7; padding:25px; border-radius:12px; box-shadow:0 8px 20px rgba(0,0,0,0.08); display:flex; flex-direction:column; gap:15px; }
+    label { font-weight:bold; color:#8e2de2; }
+    input, select { padding:12px; font-size:16px; border:1px solid #ddd; border-radius:10px; }
+    .btns { display:flex; gap:10px; justify-content:space-between; margin-top:15px; }
+    button { flex:1; padding:12px; font-size:16px; border:none; border-radius:10px; cursor:pointer; font-weight:bold; }
+    .whatsapp { background:#25D366; color:white; }
+    .whatsapp:hover { background:#1ebe5d; }
+    .email { background:#8e2de2; color:white; }
+    .email:hover { background:#ff4a7c; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chupi Salong</h1>
+    <p>Din skönhet är vår stolthet ✨</p>
+  </header>
+
+  <nav>
+    <a href="#booking">Boka tid</a>
+    <a href="#contact">Kontakt</a>
+  </nav>
+
+  <!-- Booking Section -->
+  <section id="booking">
+    <h2>Boka tid</h2>
+    <form id="bookingForm">
+      <label for="name">Namn och efternamn</label>
+      <input type="text" id="name" required>
+
+      <label for="service">Välj tjänst</label>
+      <select id="service" required>
+        <option value="">-- välj en tjänst --</option>
+        <!-- Klippning -->
+        <option>Herr Klippning - 370 kr - 40 min</option>
+        <option>Klippning kort hår - 470 kr - 45 min</option>
+        <option>Klippning långt hår - 570 kr - 60 min</option>
+        <option>Barnklippning - 350 kr - 30 min</option>
+        <option>Maskinklippning - 270 kr - 30 min</option>
+        <option>Pensionär Herr Klippning - 280 kr - 30 min</option>
+        <option>Pensionär klippning kort hår - 360 kr - 40 min</option>
+        <option>Pensionär klippning långt hår - 460 kr - 50 min</option>
+        <!-- Färgning -->
+        <option>Helfärgning - från 990 kr - 105 min</option>
+        <option>Bottenfärgning - från 790 kr - 90 min</option>
+        <!-- Behandling -->
+        <option>Keratin behandling Re-Born - från 1500 kr - 135 min</option>
+        <option>Paket behandling kort hår - från 2270 kr - 195 min</option>
+        <option>Paket behandling långt hår - från 2570 kr - 225 min</option>
+        <!-- Slingor -->
+        <option>Slingor kort hår - från 1570 kr - 180 min</option>
+        <option>Slingor långt hår - från 1870 kr - 180 min</option>
+        <option>Slingor med folie kort hår -från 1570 kr - 150 min</option>
+        <option>Slingor med folie långt hår - från 1870 kr - 180 min</option>
+      </select>
+
+      <label for="date">Datum</label>
+      <input type="date" id="date" required>
+
+      <label for="time">Tid</label>
+      <input type="time" id="time" required>
+
+      <div class="btns">
+        <button type="button" class="whatsapp" onclick="sendWhatsApp()">Boka via WhatsApp</button>
+        <button type="button" class="email" onclick="sendEmail()">Boka via Email</button>
+      </div>
+    </form>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact">
+    <h2>Kontakt</h2>
+    <p>📍 Sofielundsvägen 7, 121 32 Enskededalen</p>
+    <p>📞 0768384208</p>
+    <p>📧 Email: <a href="mailto:sanduce86@gmail.com">sanduce86@gmail.com</a></p>
+    <p>📸 Instagram: <a href="https://www.instagram.com/chupi_salong">@chupi_salong</a></p>
+  </section>
+
+  <script>
+    function getBookingDetails() {
+      const name = document.getElementById("name").value;
+      const service = document.getElementById("service").value;
+      const date = document.getElementById("date").value;
+      const time = document.getElementById("time").value;
+      return { name, service, date, time };
+    }
+
+    function sendWhatsApp() {
+      const { name, service, date, time } = getBookingDetails();
+      const phoneNumber = "46768384208"; // شماره با کد کشور
+      const message = `Hej! Jag heter ${name} och vill boka:\n\nTjänst: ${service}\nDatum: ${date}\nTid: ${time}\n\nTack!`;
+      const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+      window.open(url, "_blank");
+    }
+
+    function sendEmail() {
+      const { name, service, date, time } = getBookingDetails();
+      const subject = `Bokning från ${name}`;
+      const body = `Hej!\n\nJag vill boka:\n\nTjänst: ${service}\nDatum: ${date}\nTid: ${time}\n\nMvh,\n${name}`;
+      const email = "sanduce86@gmail.com"; // ایمیل مقصد
+      const url = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      window.location.href = url;
+    }
+  </script>
+</body>
+</html>
